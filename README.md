@@ -11,6 +11,8 @@ Personaliza los *thinking labels* de Claude Code — esos textos que aparecen mi
 
 El nombre viene del **Proyecto Quejica**: la idea original de dotar a las aspiradoras automáticas de voz para que limpiaran quejándose.
 
+> El script es idempotente: ejecutarlo varias veces sobre un cli.js ya parcheado no produce efectos secundarios.
+
 ## Requisitos
 
 - Python 3
