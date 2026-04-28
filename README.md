@@ -4,8 +4,8 @@ Customize the *thinking labels* of Claude Code and Gemini CLI — those status m
 
 <div align=center>
 
-|![](images/maldiciendo.jpeg)|![](images/rezando.jpeg)<br>![](images/sudando.jpeg)|
-|-|-|
+|![](images/maldiciendo.jpeg)|![](images/rezando.jpeg)<br>![](images/sudando.jpeg)|![](images/Firibicundiando.jpeg)|
+|-|-|-|
 
 </div>
 
