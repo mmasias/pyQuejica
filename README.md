@@ -4,8 +4,8 @@ Personaliza los *thinking labels* de Claude Code — esos textos que aparecen mi
 
 <div align=center>
 
-|![](/images/maldiciendo.jpeg)|![](/images/rezando.jpeg)|![](/images/sudando.jpeg)|
-|-|-|-|
+|![](/images/maldiciendo.jpeg)|![](/images/rezando.jpeg)<br>![](/images/sudando.jpeg)|
+|-|-|
 
 </div>
 
