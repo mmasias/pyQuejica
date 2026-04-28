@@ -1,57 +1,57 @@
 # pyQuejica
 
-Personaliza los *thinking labels* de Claude Code y Gemini CLI — esos textos que aparecen mientras el modelo razona o ejecuta herramientas — sustituyéndolos por verbos y mensajes propios.
+Customize the *thinking labels* of Claude Code and Gemini CLI — those status messages that appear while the model is reasoning or executing tools — by replacing them with your own expressive verbs and phrases.
 
 <div align=center>
 
-|![](/images/maldiciendo.jpeg)|![](/images/rezando.jpeg)<br>![](/images/sudando.jpeg)|![](/images/Firibicundiando.jpeg)|
-|-|-|-|
+|![](images/maldiciendo.jpeg)|![](images/rezando.jpeg)<br>![](images/sudando.jpeg)|
+|-|-|
 
 </div>
 
-El nombre viene del **Proyecto Quejica**: la idea original de dotar a las aspiradoras automáticas de voz para que limpiaran quejándose.
+The name comes from **Proyecto Quejica** (Project Whiner): the original idea of giving automatic vacuum cleaners a voice so they would clean while complaining.
 
-> Los scripts son idempotentes: ejecutarlos varias veces sobre archivos ya parcheados no produce efectos secundarios negativos.
+> The scripts are idempotent: running them multiple times on already patched files won't cause any negative side effects.
 
-## Requisitos
+## Requirements
 
 - Python 3
-- Claude Code instalado (`claude`) y/o Gemini CLI instalado (`gemini`) y accesibles en el PATH.
+- Claude Code installed (`claude`) and/or Gemini CLI installed (`gemini`), accessible in your PATH.
 
-## Uso
+## Usage
 
-### Para Claude Code
+### For Claude Code
 ```bash
-# Aplica los verbos definidos en VERBS (Maldiciendo, Pujando...)
+# Applies the custom verbs defined in VERBS (Cursing, Grunting, Procrastinating...)
 python3 patch_claude_verbs.py
 
-# Muestra los verbos actuales y restaura el original
+# Show current verbs and restore the original ones
 python3 patch_claude_verbs.py --status
 python3 patch_claude_verbs.py --restore
 ```
 
-### Para Gemini CLI
+### For Gemini CLI
 ```bash
-# Aplica los mensajes personalizados (Firibicundiando, Chismorreando...)
+# Applies custom status messages (Firibicundiando, Snooping around, Doing the dirty work...)
 python3 patch_gemini_verbs.py
 
-# Muestra el estado del parche y restaura los backups
+# Show patch status and restore backups
 python3 patch_gemini_verbs.py --status
 python3 patch_gemini_verbs.py --restore
 ```
 
-## Personalización
+## Customization
 
-- **Claude:** Edita la lista `VERBS` al inicio de `patch_claude_verbs.py`.
-- **Gemini:** Edita el diccionario `TRANSLATIONS` en `patch_gemini_verbs.py` para cambiar qué mensaje sustituye a cuál.
+- **Claude:** Edit the `VERBS` list at the beginning of `patch_claude_verbs.py`.
+- **Gemini:** Edit the `TRANSLATIONS` dictionary in `patch_gemini_verbs.py` to change which message replaces which.
 
-## Cómo funciona
+## How it works
 
 ### Claude Code
-El bundle (`cli.js`) contiene un array de gerundios. El script localiza el patrón `return[...VAR,...q.verbs]` en el bundle minificado, identifica la variable y sustituye su inicialización.
+The bundle (`cli.js`) contains an array of gerunds used for the thinking labels. The script locates the `return[...VAR,...q.verbs]` pattern in the minified bundle, identifies the variable name, and replaces its initialization with your custom list.
 
 ### Gemini CLI
-El bundle está dividido en `chunks`. El script explora el directorio del bundle buscando cadenas específicas de las herramientas (como "Searching the web" o "Thinking") y las reemplaza por versiones con más personalidad (como "Chismorreando en internet" o "Firibicundiando").
+The bundle is split into several `chunks`. The script explores the bundle directory looking for specific tool-related strings (like "Searching the web" or "Thinking") and replaces them with versions that have more personality (like "Snooping around the web" or "Firibicundiando").
 
-## Tras actualizar las herramientas
-Cada actualización via `npm` sobreescribe los archivos y borra el parche. Solo hay que volver a ejecutar los scripts (y borrar los `.bak` viejos si el script indica que ya existen).
+## After updating your CLI tools
+Every `npm` update overwrites the files and removes the patch. Simply run the scripts again (and delete the old `.bak` files if the script indicates they already exist).
