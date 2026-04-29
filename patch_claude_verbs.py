@@ -128,6 +128,17 @@ def cmd_patch(target: str, is_binary: bool, verbs: list):
     with open(target, "wb") as f:
         f.write(data)
     print(f"Array nuevo: {first_new[:80].decode('utf-8', errors='replace')}...")
+
+    if sys.platform == "darwin":
+        result = subprocess.run(
+            ["codesign", "-s", "-", "--force", target],
+            capture_output=True, text=True,
+        )
+        if result.returncode == 0:
+            print("Firma ad-hoc aplicada (macOS).")
+        else:
+            print(f"Aviso: codesign falló — {result.stderr.strip()}")
+
     print("Listo.")
 
 
