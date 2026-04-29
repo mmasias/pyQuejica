@@ -1,4 +1,4 @@
-# pyQuejica
+# pyQuejica (a.k.a. The Whiner Project)
 
 Customize the *thinking labels* of Claude Code and Gemini CLI — those status messages that appear while the model is reasoning or executing tools — by replacing them with your own expressive verbs and phrases.
 
