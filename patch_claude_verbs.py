@@ -17,6 +17,7 @@ import os
 import sys
 import shutil
 import subprocess
+import tempfile
 
 VERBS = [
     "Maldiciendo", "Pujando", "Farfullando", "Procrastinando", "Rezando", "Negociando", 
@@ -52,6 +53,11 @@ VERBS = [
 _JSON_ARRAY = rb'\[(?:"[^"]+",)*"[^"]+"\s*\]'
 
 
+def _is_elf(path: str) -> bool:
+    with open(path, "rb") as f:
+        return f.read(4) == b"\x7fELF"
+
+
 def find_claude_target():
     """Returns (path, is_binary) for the Claude Code patchable file."""
     result = subprocess.run(["which", "claude"], capture_output=True, text=True)
@@ -59,13 +65,13 @@ def find_claude_target():
         raise FileNotFoundError("'claude' no encontrado en PATH")
     real_path = os.path.realpath(result.stdout.strip())
 
-    # Nuevo formato: binario ELF compilado
-    if real_path.endswith("claude.exe") and os.path.exists(real_path):
-        return real_path, True
-
-    # Formato clásico: symlink directo a cli.js
-    if real_path.endswith("cli.js") and os.path.exists(real_path):
-        return real_path, False
+    if os.path.exists(real_path) and os.path.isfile(real_path):
+        # Binario ELF: detectado por magic bytes (cubre claude.exe y versiones sin extensión)
+        if _is_elf(real_path):
+            return real_path, True
+        # Formato clásico: symlink directo a cli.js
+        if real_path.endswith("cli.js"):
+            return real_path, False
 
     # Fallback: buscar cli.js subiendo desde el binario
     search_dir = os.path.dirname(real_path)
@@ -76,7 +82,7 @@ def find_claude_target():
         search_dir = os.path.dirname(search_dir)
 
     raise FileNotFoundError(
-        f"No se encontró cli.js ni claude.exe. Ruta real del binario: {real_path}"
+        f"No se encontró cli.js ni binario ELF reconocible. Ruta real: {real_path}"
     )
 
 
@@ -147,8 +153,14 @@ def cmd_patch(target: str, is_binary: bool, verbs: list):
         data = data[:start] + new_arr + data[end:]
         first_new = new_arr  # la última iteración es el offset más bajo
 
-    with open(target, "wb") as f:
-        f.write(data)
+    # Escribir a fichero temporal y renombrar para evitar ETXTBSY
+    # (el kernel bloquea escritura directa sobre un ejecutable en uso)
+    target_dir = os.path.dirname(target)
+    with tempfile.NamedTemporaryFile(dir=target_dir, delete=False) as tmp:
+        tmp.write(data)
+        tmp_path = tmp.name
+    shutil.copymode(target, tmp_path)
+    os.replace(tmp_path, target)
     print(f"Array nuevo: {first_new[:80].decode('utf-8', errors='replace')}...")
 
     if sys.platform == "darwin":
