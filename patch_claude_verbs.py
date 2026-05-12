@@ -19,34 +19,51 @@ import shutil
 import subprocess
 import tempfile
 
-VERBS = [
-    "Maldiciendo", "Pujando", "Farfullando", "Procrastinando", "Rezando", "Negociando", 
-    "Mintiendo", "Facturando", "Depurando", "Sobreviviendo", "Resignándose", "Improvisando", 
-    "Cafeinándose", "Rumiando", "Blasfemando", "Trampeando", "Bufando", "Resoplando", "Jadeando", 
-    "Gruñendo", "Pataleando", "Apechugando", "Braceando", "Cojeando", "Empujando", "Cargando", 
-    "Tirando", "Arrastrándose", "Cavilando", "Mascullando", "Titubeando", "Divagando", "Desvariando", 
-    "Alucinando", "Delirando", "Filosofando", "Conjeturando", "Elucubrando", "Maquinando", "Fraguando", 
-    "Intuyendo", "Barajando", "Especulando", "Lamentándose", "Capitulando", "Claudicando", "Derrumbándose", 
-    "Naufragando", "Hundiéndose", "Expirando", "Agonizando", "Resucitando", "Rindiéndose", "Desmoronándose", 
-    "Recomponiéndose", "Sobreponiéndose", "Arrepintiéndose", "Refactorizando", "Compilando", "Mergeando", 
-    "Commiteando", "Hackeando", "Debuggeando", "Desplegando", "Rollbackeando", "Parchando", "Testeando", 
-    "Pusheando", "Cacheando", "Parseando", "Pivotando", "Iterando", "Defragmentando", "Rebooteando", 
-    "Formateando", "Renderizando", "Bufferizando", "Pixelando", "Escaneando", "Recalentándose", 
-    "Cortocircuitándose", "Cascando", "Corrigiendo", "Calificando", "Suspendiendo", "Evaluando", 
-    "Deliberando", "Pontificando", "Discrepando", "Rebatiendo", "Disertando", "Documentando", "Disonando", 
-    "Afinando", "Destemplándose", "Sincopando", "Distorsionando", "Modulando", "Ensayando", "Componiendo", 
-    "Armonizando", "Gestionando", "Alineando", "Optimizando", "Escalando", "Delegando", "Reportando", 
-    "Reuniéndose", "Priorizando", "Stakeholdeando", "Onboardeando", "Cuestionándose", "Relativizando", 
-    "Contemplando", "Introspectando", "Epifaniando", "Iluminándose", "Existiendo", "Absurdizando", "Meditando", 
-    "Nihilizando", "Fingiendo", "Actuando", "Simulando", "Aparentando", "Blofando", "Cobrando", "Excusándose", 
-    "Justificándose", "Contemporizando", "Vendiendo", "Apañando", "Chapuceando", "Escaqueándose", "Escurriéndose", 
-    "Evadiéndose", "Culebreando", "Floreando", "Liándola", "Embrollando", "Enredándose", "Vibrando", "Oxidándose", 
-    "Descalibrándose", "Fundiéndose", "Petando", "Chirriando", "Humeando", "Sobrecargándose", "Herrumbrándose", 
-    "Chisporroteando", "Encomendándose", "Santiguándose", "Confesándose", "Expiando", "Mortificándose", "Penitenciando", 
-    "Flagelándose", "Conspirando", "Tramando", "Presagiando", "Cotorreando", "Balbuceando", "Tartamudeando", "Vaticinando", 
-    "Augurando", "Palpitando", "Apostando", "Empantanándose", "Atascándose", "Zumbando", "Jalando", "Gambeteando", "Trabándose", 
+_VERBS_FALLBACK = [
+    "Maldiciendo", "Pujando", "Farfullando", "Procrastinando", "Rezando", "Negociando",
+    "Mintiendo", "Facturando", "Depurando", "Sobreviviendo", "Resignándose", "Improvisando",
+    "Cafeinándose", "Rumiando", "Blasfemando", "Trampeando", "Bufando", "Resoplando", "Jadeando",
+    "Gruñendo", "Pataleando", "Apechugando", "Braceando", "Cojeando", "Empujando", "Cargando",
+    "Tirando", "Arrastrándose", "Cavilando", "Mascullando", "Titubeando", "Divagando", "Desvariando",
+    "Alucinando", "Delirando", "Filosofando", "Conjeturando", "Elucubrando", "Maquinando", "Fraguando",
+    "Intuyendo", "Barajando", "Especulando", "Lamentándose", "Capitulando", "Claudicando", "Derrumbándose",
+    "Naufragando", "Hundiéndose", "Expirando", "Agonizando", "Resucitando", "Rindiéndose", "Desmoronándose",
+    "Recomponiéndose", "Sobreponiéndose", "Arrepintiéndose", "Refactorizando", "Compilando", "Mergeando",
+    "Commiteando", "Hackeando", "Debuggeando", "Desplegando", "Rollbackeando", "Parchando", "Testeando",
+    "Pusheando", "Cacheando", "Parseando", "Pivotando", "Iterando", "Defragmentando", "Rebooteando",
+    "Formateando", "Renderizando", "Bufferizando", "Pixelando", "Escaneando", "Recalentándose",
+    "Cortocircuitándose", "Cascando", "Corrigiendo", "Calificando", "Suspendiendo", "Evaluando",
+    "Deliberando", "Pontificando", "Discrepando", "Rebatiendo", "Disertando", "Documentando", "Disonando",
+    "Afinando", "Destemplándose", "Sincopando", "Distorsionando", "Modulando", "Ensayando", "Componiendo",
+    "Armonizando", "Gestionando", "Alineando", "Optimizando", "Escalando", "Delegando", "Reportando",
+    "Reuniéndose", "Priorizando", "Stakeholdeando", "Onboardeando", "Cuestionándose", "Relativizando",
+    "Contemplando", "Introspectando", "Epifaniando", "Iluminándose", "Existiendo", "Absurdizando", "Meditando",
+    "Nihilizando", "Fingiendo", "Actuando", "Simulando", "Aparentando", "Blofando", "Cobrando", "Excusándose",
+    "Justificándose", "Contemporizando", "Vendiendo", "Apañando", "Chapuceando", "Escaqueándose", "Escurriéndose",
+    "Evadiéndose", "Culebreando", "Floreando", "Liándola", "Embrollando", "Enredándose", "Vibrando", "Oxidándose",
+    "Descalibrándose", "Fundiéndose", "Petando", "Chirriando", "Humeando", "Sobrecargándose", "Herrumbrándose",
+    "Chisporroteando", "Encomendándose", "Santiguándose", "Confesándose", "Expiando", "Mortificándose", "Penitenciando",
+    "Flagelándose", "Conspirando", "Tramando", "Presagiando", "Cotorreando", "Balbuceando", "Tartamudeando", "Vaticinando",
+    "Augurando", "Palpitando", "Apostando", "Empantanándose", "Atascándose", "Zumbando", "Jalando", "Gambeteando", "Trabándose",
     "Eternizándose"
 ]
+
+
+def load_verbs() -> list:
+    verbs_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "verbs.txt")
+    if os.path.exists(verbs_file):
+        with open(verbs_file, encoding="utf-8") as f:
+            verbs = [line.strip() for line in f if line.strip()]
+        if verbs:
+            print(f"Verbos cargados desde {verbs_file} ({len(verbs)} entradas)")
+            return verbs
+        print(f"Aviso: {verbs_file} está vacío, usando lista de fallback")
+    else:
+        print(f"Aviso: {verbs_file} no encontrado, usando lista de fallback")
+    return _VERBS_FALLBACK
+
+
+VERBS = load_verbs()
 
 # Matches a JSON array of strings, with optional whitespace before the closing bracket
 # (el whitespace puede quedar del padding de ejecuciones anteriores)
