@@ -36,7 +36,7 @@ Re-ejecutable sin efectos secundarios: si el repo cambia de ruta, actualiza el h
 
 ### Para Claude Code
 
-No requiere acción: el hook sincroniza `verbs.txt` con el setting nativo `spinnerVerbs` de `~/.claude/settings.json` en cada arranque. Los verbos nuevos se ven a partir del siguiente arranque.
+No requiere acción: el hook sincroniza `verbs.txt` con el setting nativo `spinnerVerbs` de `~/.claude/settings.json` en cada arranque. Claude Code vigila `settings.json` y recarga la configuración en caliente, así que los verbos nuevos se aplican incluso a las sesiones ya abiertas.
 
 Sincronización manual:
 ```bash

@@ -36,7 +36,7 @@ Safe to re-run: if the repo moves to a different path, it updates the hook.
 
 ### For Claude Code
 
-No action needed: the hook syncs `verbs.txt` into the native `spinnerVerbs` setting of `~/.claude/settings.json` on every startup. New verbs show up on the next startup.
+No action needed: the hook syncs `verbs.txt` into the native `spinnerVerbs` setting of `~/.claude/settings.json` on every startup. Claude Code watches `settings.json` and hot-reloads its configuration, so new verbs apply even to sessions that are already open.
 
 Manual sync:
 ```bash
