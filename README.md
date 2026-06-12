@@ -11,23 +11,36 @@ Customize the *thinking labels* of Claude Code and Gemini CLI — those status m
 
 The name comes from **Proyecto Quejica** (Project Whiner): the original idea of giving automatic vacuum cleaners a voice so they would clean while complaining.
 
-> The scripts are idempotent: running them multiple times on already patched files won't cause any negative side effects.
+> The scripts are idempotent: running them multiple times won't cause any negative side effects.
 
 ## Requirements
 
-- Python 3
 - Claude Code installed (`claude`) and/or Gemini CLI installed (`gemini`), accessible in your PATH.
+- `jq` (for the Claude Code sync).
+- Python 3 (for the Gemini CLI patch).
+
+## Installation
+
+```bash
+./install.sh
+```
+
+It does two things:
+
+1. Creates the `parcharLLM` symlink in `~/.local/bin` (Gemini CLI patch).
+2. Registers a `SessionStart` hook in `~/.claude/settings.json` that runs `sync-spinner-verbs.sh` on every Claude Code startup.
+
+Safe to re-run: if the repo moves to a different path, it updates the hook.
 
 ## Usage
 
 ### For Claude Code
-```bash
-# Applies the custom verbs defined in VERBS (Cursing, Grunting, Procrastinating...)
-python3 patch_claude_verbs.py
 
-# Show current verbs and restore the original ones
-python3 patch_claude_verbs.py --status
-python3 patch_claude_verbs.py --restore
+No action needed: the hook syncs `verbs.txt` into the native `spinnerVerbs` setting of `~/.claude/settings.json` on every startup. New verbs show up on the next startup.
+
+Manual sync:
+```bash
+./sync-spinner-verbs.sh
 ```
 
 ### For Gemini CLI
@@ -42,16 +55,20 @@ python3 patch_gemini_verbs.py --restore
 
 ## Customization
 
-- **Claude:** Edit the `VERBS` list at the beginning of `patch_claude_verbs.py`.
+- **Claude:** Edit `verbs.txt` (one verb per line). New verbs go at the top of the file.
 - **Gemini:** Edit the `TRANSLATIONS` dictionary in `patch_gemini_verbs.py` to change which message replaces which.
 
 ## How it works
 
 ### Claude Code
-The bundle (`cli.js`) contains an array of gerunds used for the thinking labels. The script locates the `return[...VAR,...q.verbs]` pattern in the minified bundle, identifies the variable name, and replaces its initialization with your custom list.
+Claude Code reads the `spinnerVerbs` setting from `~/.claude/settings.json` (`mode: replace` uses only your verbs; `mode: append` adds them to the stock ones). `sync-spinner-verbs.sh` regenerates that setting from `verbs.txt` whenever they differ. Since this is configuration rather than a binary patch, it survives Claude Code updates.
+
+Legacy method: `patch_claude_verbs.py` patched the gerund array directly in the bundle (`cli.js`) or the ELF binary. It is kept in case the native setting goes away (`--restore` undoes the patch).
 
 ### Gemini CLI
 The bundle is split into several `chunks`. The script explores the bundle directory looking for specific tool-related strings (like "Searching the web" or "Thinking") and replaces them with versions that have more personality (like "Snooping around the web" or "Firibicundiando").
 
 ## After updating your CLI tools
-Every `npm` update overwrites the files and removes the patch. Simply run the scripts again (and delete the old `.bak` files if the script indicates they already exist).
+
+- **Claude Code:** nothing to do; the setting and the hook survive updates.
+- **Gemini CLI:** every `npm` update overwrites the files and removes the patch. Just run `patch_gemini_verbs.py` again (and delete the old `.bak` files if the script indicates they already exist).
