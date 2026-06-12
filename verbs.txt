@@ -40,7 +40,7 @@ Sacrificando un proceso al dios del kernel
 Mirando la pantalla del Whatsapp
 Escribiendo a mano
 Calculando a lápiz y papel
-Requisitando
+Requisitando material de oficina
 Maldiciendo en arameo
 Buscando un culpable
 Convocando una junta
@@ -55,178 +55,178 @@ Revisando el libro de excusas
 Cargando una IA para ver la respuesta
 Apagando y encendiendo repetidas veces
 Observándote con curiosidad
-Maldiciendo
-Pujando
-Farfullando
-Procrastinando
-Rezando
-Negociando
-Mintiendo
-Facturando
-Depurando
-Sobreviviendo
-Resignándose
-Improvisando
-Cafeinándose
-Rumiando
-Blasfemando
-Trampeando
-Bufando
-Resoplando
-Jadeando
-Gruñendo
-Pataleando
-Apechugando
-Braceando
-Cojeando
-Empujando
-Cargando
-Tirando
-Arrastrándose
-Cavilando
-Mascullando
-Titubeando
-Divagando
-Desvariando
-Alucinando
-Delirando
-Filosofando
-Conjeturando
-Elucubrando
-Maquinando
-Fraguando
-Intuyendo
-Barajando
-Especulando
-Lamentándose
-Capitulando
-Claudicando
-Derrumbándose
-Naufragando
-Hundiéndose
-Expirando
-Agonizando
-Resucitando
-Rindiéndose
-Desmoronándose
-Recomponiéndose
-Sobreponiéndose
-Arrepintiéndose
-Refactorizando
-Compilando
-Mergeando
-Commiteando
-Hackeando
-Debuggeando
-Desplegando
-Rollbackeando
-Parchando
-Testeando
-Pusheando
-Cacheando
-Parseando
-Pivotando
-Iterando
-Defragmentando
-Rebooteando
-Formateando
-Renderizando
-Bufferizando
-Pixelando
-Escaneando
-Recalentándose
-Cortocircuitándose
-Cascando
-Corrigiendo
-Calificando
-Suspendiendo
-Evaluando
-Deliberando
-Pontificando
-Discrepando
-Rebatiendo
-Disertando
-Documentando
-Disonando
-Afinando
-Destemplándose
-Sincopando
-Distorsionando
-Modulando
-Ensayando
-Componiendo
-Armonizando
-Gestionando
-Alineando
-Optimizando
-Escalando
-Delegando
-Reportando
-Reuniéndose
-Priorizando
-Stakeholdeando
-Onboardeando
-Cuestionándose
-Relativizando
-Contemplando
-Introspectando
-Epifaniando
-Iluminándose
-Existiendo
-Absurdizando
-Meditando
-Nihilizando
-Fingiendo
-Actuando
-Simulando
-Aparentando
-Blofando
-Cobrando
-Excusándose
-Justificándose
-Contemporizando
-Vendiendo
-Apañando
-Chapuceando
-Escaqueándose
-Escurriéndose
-Evadiéndose
-Culebreando
-Floreando
-Liándola
-Embrollando
-Enredándose
-Vibrando
-Oxidándose
-Descalibrándose
-Fundiéndose
-Petando
-Chirriando
-Humeando
-Sobrecargándose
-Herrumbrándose
-Chisporroteando
-Encomendándose
-Santiguándose
-Confesándose
-Expiando
-Mortificándose
-Penitenciando
-Flagelándose
-Conspirando
-Tramando
-Presagiando
-Cotorreando
-Balbuceando
-Tartamudeando
-Vaticinando
-Augurando
-Palpitando
-Apostando
-Empantanándose
-Atascándose
-Zumbando
-Jalando
-Gambeteando
-Trabándose
-Eternizándose
+Maldiciendo en binario
+Pujando por un dominio caducado
+Farfullando algo ininteligible
+Procrastinando con conocimiento de causa
+Rezando para que compile
+Negociando con el recolector de basura
+Mintiendo con intervalos de confianza
+Facturando horas no trabajadas
+Depurando a base de prints
+Sobreviviendo al sprint
+Resignándose a leer la documentación
+Improvisando con total seguridad
+Cafeinándose por vía intravenosa
+Rumiando ideas de segunda mano
+Blasfemando contra el linter
+Trampeando los tests
+Bufando como una olla exprés
+Resoplando ante los requisitos
+Jadeando en la última iteración
+Gruñendo ante el código heredado
+Pataleando contra el deadline
+Apechugando con lo que hay
+Braceando en un mar de logs
+Cojeando hacia la solución
+Empujando bits cuesta arriba
+Cargando con la culpa de otro
+Tirando, que es gerundio
+Arrastrándose hasta el viernes
+Cavilando a fuego lento
+Mascullando nombres de variables
+Titubeando con aplomo
+Divagando dentro del presupuesto
+Desvariando con fundamento
+Alucinando, pero poquito
+Delirando dentro de los parámetros
+Filosofando en horario laboral
+Conjeturando con cara de saber
+Elucubrando por encima de mis posibilidades
+Maquinando algo legal, probablemente
+Fraguando un plan B
+Intuyendo dónde está el bug
+Barajando opciones descartadas
+Especulando sin licencia
+Lamentándose con elegancia
+Capitulando con honor
+Claudicando por fases
+Derrumbándose ordenadamente
+Naufragando cerca de la costa
+Hundiéndose con el barco en producción
+Expirando como un token
+Agonizando dentro del SLA
+Resucitando procesos zombis
+Rindiéndose con condiciones
+Desmoronándose por módulos
+Recomponiéndose tras el code review
+Sobreponiéndose al feedback
+Arrepintiéndose del último commit
+Refactorizando lo que funcionaba
+Compilando excusas
+Mergeando sin mirar los conflictos
+Commiteando directamente a main
+Hackeando la impresora de la oficina
+Debuggeando con velas y un péndulo
+Desplegando y cruzando los dedos
+Rollbackeando con disimulo
+Parchando el parche del parche
+Testeando en casa del cliente
+Pusheando con --force y sin remordimientos
+Cacheando lo que nadie pidió
+Parseando HTML con regex
+Pivotando hacia otra excusa
+Iterando sobre el mismo error
+Defragmentando recuerdos de Windows 98
+Rebooteando por si acaso
+Formateando sin copia de seguridad
+Renderizando a mano alzada
+Bufferizando la respuesta desde 1998
+Pixelando las partes sensibles
+Escaneando el horizonte en busca de excusas
+Recalentándose como portátil en verano
+Cortocircuitándose con chispas y todo
+Cascando sin mensaje de error
+Corrigiendo exámenes a bolígrafo rojo
+Calificando con curva generosa
+Suspendiendo a todo el laboratorio
+Evaluando con rúbrica inventada
+Deliberando a puerta cerrada
+Pontificando sin datos
+Discrepando respetuosamente
+Rebatiendo mi propia respuesta
+Disertando ante un público imaginario
+Documentando lo que ya no existe
+Disonando en si bemol
+Afinando de oído
+Destemplándose en el segundo movimiento
+Sincopando a contratiempo
+Distorsionando con el ampli al once
+Modulando a una tonalidad imposible
+Ensayando la cara de sorpresa
+Componiendo una disculpa en cuatro movimientos
+Armonizando opiniones irreconciliables
+Gestionando expectativas a la baja
+Alineando astros y stakeholders
+Optimizando lo que nadie usa
+Escalando el problema a quien no toca
+Delegando en el becario
+Reportando verde lo que está en rojo
+Reuniéndose para agendar otra reunión
+Priorizando todo como urgente
+Stakeholdeando sin piedad
+Onboardeando a mi propio clon
+Cuestionándose las decisiones de vida
+Relativizando la gravedad del asunto
+Contemplando el abismo del legacy
+Introspectando sin encontrar nada
+Epifaniando en la ducha
+Iluminándose a destiempo
+Existiendo bajo demanda
+Absurdizando con rigor metodológico
+Meditando entre interrupciones
+Nihilizando con optimismo
+Fingiendo que esto estaba planeado
+Actuando como si lo entendiera
+Simulando carga de trabajo
+Aparentando serenidad profesional
+Blofando con cartas marcadas
+Cobrando por pensar en voz alta
+Excusándose por adelantado
+Justificándose sin que nadie pregunte
+Contemporizando hasta el infinito
+Vendiendo humo certificado
+Apañando con cinta americana
+Chapuceando con orgullo artesano
+Escaqueándose por la puerta de atrás
+Escurriéndose entre dos reuniones
+Evadiéndose mentalmente de la daily
+Culebreando entre requisitos
+Floreando el informe
+Liándola parda
+Embrollando lo que estaba claro
+Enredándose con los cables
+Vibrando en modo silencio
+Oxidándose a la intemperie
+Descalibrándose lentamente
+Fundiéndose como fusible barato
+Petando en producción
+Chirriando por falta de aceite
+Humeando por el ventilador
+Sobrecargándose como regleta navideña
+Herrumbrándose con dignidad
+Chisporroteando como sartén vieja
+Encomendándose a san Turing
+Santiguándose antes del deploy
+Confesándose con el log
+Expiando commits ajenos
+Mortificándose por aquel rm -rf
+Penitenciando en COBOL
+Flagelándose con el código de ayer
+Conspirando con el otro monitor
+Tramando algo poco escalable
+Presagiando un hotfix
+Cotorreando con otros procesos
+Balbuceando la primera idea
+Tartamudeando en la demo
+Vaticinando retrasos
+Augurando un viernes complicado
+Palpitando a 9600 baudios
+Apostando la reputación a una corazonada
+Empantanándose con estilo
+Atascándose en la parte fácil
+Zumbando como un transformador
+Jalando del repositorio equivocado
+Gambeteando responsabilidades
+Trabándose en la palabra clave
+Eternizándose en los detalles
