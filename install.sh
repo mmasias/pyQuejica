@@ -13,27 +13,40 @@ chmod +x "$REPO/parchar-llm.sh" "$REPO/sync-spinner-verbs.sh"
 ln -sf "$REPO/parchar-llm.sh" ~/.local/bin/parcharLLM
 echo "parcharLLM disponible en ~/.local/bin/parcharLLM"
 
-if ! command -v jq >/dev/null; then
-    echo "Aviso: jq no encontrado; no se registra el hook de Claude Code." >&2
-    echo "Instalar jq (apt/dnf/brew) y re-ejecutar install.sh." >&2
-    exit 0
-fi
-
 SETTINGS="$HOME/.claude/settings.json"
 HOOK_CMD="$REPO/sync-spinner-verbs.sh"
 mkdir -p "$HOME/.claude"
-[ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
 
-tmp=$(mktemp "$SETTINGS.XXXXXX")
-jq --arg cmd "$HOOK_CMD" '
-    .hooks.SessionStart = (
-        ((.hooks.SessionStart // [])
-         | map(select(((.hooks[0].command // "") | endswith("sync-spinner-verbs.sh")) | not)))
-        + [{hooks: [{type: "command", command: $cmd, timeout: 15,
-                     statusMessage: "Sincronizando verbos de pyQuejica"}]}]
-    )' "$SETTINGS" > "$tmp"
-mv "$tmp" "$SETTINGS"
+python3 - "$HOOK_CMD" "$SETTINGS" <<'EOF'
+import json, sys
+from pathlib import Path
+
+hook_cmd = sys.argv[1]
+settings_path = Path(sys.argv[2])
+
+settings = json.loads(settings_path.read_text()) if settings_path.exists() else {}
+
+session_start = settings.get('hooks', {}).get('SessionStart', [])
+session_start = [
+    e for e in session_start
+    if not e.get('hooks', [{}])[0].get('command', '').endswith('sync-spinner-verbs.sh')
+]
+session_start.append({
+    'hooks': [{
+        'type': 'command',
+        'command': hook_cmd,
+        'timeout': 15,
+        'statusMessage': 'Sincronizando verbos de pyQuejica'
+    }]
+})
+settings.setdefault('hooks', {})['SessionStart'] = session_start
+
+tmp = settings_path.with_suffix('.tmp')
+tmp.write_text(json.dumps(settings, indent=2, ensure_ascii=False) + '\n')
+tmp.replace(settings_path)
+EOF
+
 echo "Hook SessionStart registrado: $HOOK_CMD"
 
-"$HOOK_CMD"
+"$REPO/sync-spinner-verbs.sh"
 echo "spinnerVerbs sincronizado desde $REPO/verbs.txt"

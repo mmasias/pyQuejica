@@ -8,20 +8,25 @@
 set -euo pipefail
 
 SCRIPT_DIR=$(dirname "$(realpath "$0")")
-VERBS_FILE="$SCRIPT_DIR/verbs.txt"
-SETTINGS="$HOME/.claude/settings.json"
 
-command -v jq >/dev/null || exit 0
-[ -f "$VERBS_FILE" ] || exit 0
-[ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
+python3 - "$SCRIPT_DIR" <<'EOF'
+import json, sys
+from pathlib import Path
 
-new_verbs=$(jq -R -s 'split("\n") | map(select(length > 0))' "$VERBS_FILE")
-current_verbs=$(jq '.spinnerVerbs.verbs // []' "$SETTINGS")
+script_dir = Path(sys.argv[1])
+verbs_file = script_dir / 'verbs.txt'
+settings_path = Path.home() / '.claude' / 'settings.json'
 
-if [ "$new_verbs" != "$current_verbs" ]; then
-    tmp=$(mktemp "$SETTINGS.XXXXXX")
-    jq --argjson verbs "$new_verbs" \
-        '.spinnerVerbs = {mode: "replace", verbs: $verbs}' \
-        "$SETTINGS" > "$tmp"
-    mv "$tmp" "$SETTINGS"
-fi
+if not verbs_file.exists():
+    sys.exit(0)
+
+new_verbs = [l for l in verbs_file.read_text().splitlines() if l.strip()]
+
+settings = json.loads(settings_path.read_text()) if settings_path.exists() else {}
+
+if new_verbs != settings.get('spinnerVerbs', {}).get('verbs', []):
+    settings['spinnerVerbs'] = {'mode': 'replace', 'verbs': new_verbs}
+    tmp = settings_path.with_suffix('.tmp')
+    tmp.write_text(json.dumps(settings, indent=2, ensure_ascii=False) + '\n')
+    tmp.replace(settings_path)
+EOF
