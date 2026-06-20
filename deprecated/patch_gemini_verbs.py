@@ -38,7 +38,15 @@ def find_gemini_bundle_dir():
         raise FileNotFoundError("'gemini' no encontrado en PATH")
     gemini_bin = result.stdout.strip()
     real_path = os.path.realpath(gemini_bin)
-    
+
+    if real_path.startswith("/snap/"):
+        raise EnvironmentError(
+            "Gemini CLI está instalado via snap, cuyo sistema de archivos es de solo lectura.\n"
+            "        El parche directo del bundle no es compatible con instalaciones snap.\n"
+            "        Instala Gemini CLI via npm para poder usar este script:\n"
+            "          npm install -g @google/gemini-cli"
+        )
+
     # Si real_path es .../bundle/gemini.js, el dir es os.path.dirname(real_path)
     current_dir = os.path.dirname(real_path)
     if os.path.basename(current_dir) == "bundle":
