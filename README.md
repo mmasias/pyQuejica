@@ -43,7 +43,10 @@ Manual sync:
 ./sync-spinner-verbs.sh
 ```
 
-### For Gemini CLI
+### For Gemini CLI (legacy method)
+
+> **Note:** the Gemini patch modifies the bundle directly and is lost on every `npm update`. There is no native equivalent to Claude Code's `spinnerVerbs`. If you mainly use Claude, you don't need this.
+
 ```bash
 # Applies custom status messages (Firibicundiando, Snooping around, Doing the dirty work...)
 python3 patch_gemini_verbs.py
@@ -63,7 +66,7 @@ python3 patch_gemini_verbs.py --restore
 ### Claude Code
 Claude Code reads the `spinnerVerbs` setting from `~/.claude/settings.json` (`mode: replace` uses only your verbs; `mode: append` adds them to the stock ones). `sync-spinner-verbs.sh` regenerates that setting from `verbs.txt` whenever they differ. Since this is configuration rather than a binary patch, it survives Claude Code updates.
 
-Legacy method: `patch_claude_verbs.py` patched the gerund array directly in the bundle (`cli.js`) or the ELF binary. It is kept in case the native setting goes away (`--restore` undoes the patch).
+Legacy method (not recommended): `patch_claude_verbs.py` patched the gerund array directly in the bundle (`cli.js`) or the ELF binary. It is kept in case the native setting goes away in the future (`--restore` undoes the patch).
 
 ### Gemini CLI
 The bundle is split into several `chunks`. The script explores the bundle directory looking for specific tool-related strings (like "Searching the web" or "Thinking") and replaces them with versions that have more personality (like "Snooping around the web" or "Firibicundiando").

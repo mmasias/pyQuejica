@@ -129,8 +129,16 @@ def cmd_status(files):
         print("No se encontraron mensajes conocidos. Comprueba la versión de Gemini CLI.")
 
 def main():
+    print(
+        "\n[AVISO] patch_gemini_verbs.py es el método histórico de parcheo y ya no se recomienda.\n"
+        "        El parche modifica el bundle de Gemini CLI directamente y se pierde con cada\n"
+        "        actualización de npm. No existe equivalente nativo como el spinnerVerbs de Claude.\n"
+        "        Consulta el README para alternativas.\n",
+        file=sys.stderr,
+    )
+
     arg = sys.argv[1] if len(sys.argv) > 1 else ""
-    
+
     try:
         bundle_dir = find_gemini_bundle_dir()
         print(f"Directorio de bundle: {bundle_dir}\n")

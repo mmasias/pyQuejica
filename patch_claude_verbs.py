@@ -188,6 +188,14 @@ def cmd_status(target: str):
 
 
 def main():
+    print(
+        "\n[AVISO] patch_claude_verbs.py es el método histórico de parcheo y ya no se recomienda.\n"
+        "        Usa install.sh una vez: registra un hook SessionStart que sincroniza verbs.txt\n"
+        "        con el setting nativo spinnerVerbs de Claude Code en cada arranque.\n"
+        "        El parche manual solo tiene sentido si el setting nativo desaparece en el futuro.\n",
+        file=sys.stderr,
+    )
+
     arg = sys.argv[1] if len(sys.argv) > 1 else ""
 
     target, is_binary = find_claude_target()
