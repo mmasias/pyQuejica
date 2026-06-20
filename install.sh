@@ -1,17 +1,13 @@
 #!/bin/bash
 # Instala pyQuejica en esta maquina:
-#   1. Symlink parcharLLM en ~/.local/bin (parche de Gemini CLI).
-#   2. Hook SessionStart en ~/.claude/settings.json que sincroniza verbs.txt
-#      con el setting nativo spinnerVerbs de Claude Code en cada arranque.
+#   Registra un hook SessionStart en ~/.claude/settings.json que sincroniza
+#   verbs.txt con el setting nativo spinnerVerbs de Claude Code en cada arranque.
 # Idempotente: re-ejecutar actualiza el hook si el repo cambio de ruta.
 set -euo pipefail
 
 REPO=$(dirname "$(realpath "$0")")
 
-mkdir -p ~/.local/bin
-chmod +x "$REPO/parchar-llm.sh" "$REPO/sync-spinner-verbs.sh"
-ln -sf "$REPO/parchar-llm.sh" ~/.local/bin/parcharLLM
-echo "parcharLLM disponible en ~/.local/bin/parcharLLM"
+chmod +x "$REPO/sync-spinner-verbs.sh"
 
 SETTINGS="$HOME/.claude/settings.json"
 HOOK_CMD="$REPO/sync-spinner-verbs.sh"
